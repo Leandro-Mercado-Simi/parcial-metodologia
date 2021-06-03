@@ -9,20 +9,17 @@ const Movies = db.movie;
 const Genres = db.genre;
 const Actors = db.actor;
 
-console.log('estoy en el controlador de movies')
-
 const moviesController = {
     'list': (req, res) => {
-        console.log('Este es el metodo que falla')
         db.movie.findAll()
             .then(movies => {
-                res.render('moviesList.ejs', {movies})
+                res.json(movies);
             })
     },
     'detail': (req, res) => {
         db.movie.findByPk(req.params.id)
             .then(movie => {
-                res.render('moviesDetail.ejs', {movie});
+                res.json(movie);
             });
     },
     'new': (req, res) => {
@@ -33,7 +30,7 @@ const moviesController = {
             limit: 5
         })
             .then(movies => {
-                res.render('newestMovies', {movies});
+                res.json(movies);
             });
     },
     'recomended': (req, res) => {
@@ -46,7 +43,7 @@ const moviesController = {
             ]
         })
             .then(movies => {
-                res.render('recommendedMovies.ejs', {movies});
+                res.json(movies);
             });
     },
     //Aqui dispongo las rutas para trabajar con el CRUD
