@@ -7,8 +7,11 @@ const indexRouter = require('./routes/index');
 const moviesRoutes = require('./routes/moviesRoutes');
 const genresRoutes = require('./routes/genresRoutes');
 const app = express();
+const bodyParser  = require('body-parser');
 
 app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // view engine setup
 app.set('views', path.resolve(__dirname, './views'));

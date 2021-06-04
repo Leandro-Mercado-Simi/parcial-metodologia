@@ -70,7 +70,7 @@ const moviesController = {
             }
         )
         .then(()=> {
-            return res.redirect('/movies')})            
+            return res.status(200).send("Listo")})            
         .catch(error => res.send(error))
     },
     edit: function(req,res) {
@@ -100,7 +100,7 @@ const moviesController = {
                 where: {id: movieId}
             })
         .then(()=> {
-            return res.redirect('/movies')})            
+            return res.status(200).send("Listo")})            
         .catch(error => res.send(error))
     },
     delete: function (req,res) {
@@ -108,7 +108,7 @@ const moviesController = {
         Movies
         .findByPk(movieId)
         .then(Movie => {
-            return res.render(path.resolve(__dirname, '..', 'views',  'moviesDelete'), {Movie})})
+            return res.json(movie);
         .catch(error => res.send(error))
     },
     destroy: function (req,res) {
@@ -116,7 +116,7 @@ const moviesController = {
         Movies
         .destroy({where: {id: movieId}, force: true}) // force: true es para asegurar que se ejecute la acción
         .then(()=>{
-            return res.redirect('/movies')})
+            return res.status(200).send("Listo")})
         .catch(error => res.send(error)) 
     }
 }
